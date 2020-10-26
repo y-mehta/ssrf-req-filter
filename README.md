@@ -1,6 +1,6 @@
 # ssrf-req-filter - Prevent SSRF Attacks :shield:
 
-## SSRF
+## Server-Side Request Forgery (SSRF)
 SSRF is an attack vector that abuses an application to interact with the internal/external network or the machine itself. One of the enablers for this vector is the mishandling of URLs. [Read More](https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html)
 
 ## Install
