@@ -1,4 +1,4 @@
-const customAgent = require('ssrf-req-filter');
+const ssrfFilter = require('ssrf-req-filter');
 const axios = require('axios');
 const fs = require('fs');
 const readline = require('readline');
@@ -11,7 +11,7 @@ const file = readline.createInterface({
 });
 
 file.on('line', (line) => {
-  axios.get(line, {httpAgent: customAgent(line), httpsAgent: customAgent(line)})
+  axios.get(line, {httpAgent: ssrfFilter(line), httpsAgent: ssrfFilter(line)})
       .then((response) => {
         console.log(`Success: ${line}`);
       })
