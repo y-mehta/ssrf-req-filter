@@ -1,36 +1,61 @@
-const ssrfFilter = require('ssrf-req-filter');
+const ssrfFilter = require('../index');
 const axios = require('axios');
 const fs = require('fs');
-const readline = require('readline');
-// const http = require('http');
+const expect = require('chai').expect;
+const blockUrlsFile = `${__dirname}/blockUrls.txt`;
+const allowedUrlsFile = `${__dirname}/allowedUrls.txt`;
+let blockUrls;
+let allowedUrls;
 
-const file = readline.createInterface({
-  input: fs.createReadStream('testUrls.txt'),
-  output: process.stdout,
-  terminal: false,
+try {
+  blockUrls = JSON.parse(fs.readFileSync(blockUrlsFile));
+} catch (err) {
+  console.log(err);
+}
+
+blockUrls.forEach((url)=>{
+  it(`${url} Is Blocked`, async () => {
+    let check = 0;
+    const response = await axios.get(url, {httpAgent: ssrfFilter(url),
+      httpsAgent: ssrfFilter(url)})
+        .then((response) => {
+          check = 1;
+          // console.log(`Success: ${url}`);
+        })
+        .catch((error) => {
+          check = 0;
+          // console.log('Error');
+        })
+        .then(() => {
+          return check;
+        });
+    expect(response).to.equal(0);
+  });
 });
 
-file.on('line', (line) => {
-  axios.get(line, {httpAgent: ssrfFilter(line), httpsAgent: ssrfFilter(line)})
-      .then((response) => {
-        console.log(`Success: ${line}`);
-      })
-      .catch((error) => {
-        console.log(`${line} : ${error.toString().split('\n')[0]}`);
-      })
-      .then(() => {
+try {
+  allowedUrls = JSON.parse(fs.readFileSync(allowedUrlsFile));
+} catch (err) {
+  console.log(err);
+}
 
-      });
+allowedUrls.forEach((url)=>{
+  it(`${url} is Allowed`, async () => {
+    let check = 0;
+    const response = await axios.get(url, {httpAgent: ssrfFilter(url),
+      httpsAgent: ssrfFilter(url)})
+        .then((response) => {
+          check = 1;
+          // console.log(`Success: ${url}`);
+        })
+        .catch((error) => {
+          check = 0;
+          // console.log(error);
+        })
+        .then(() => {
+          return check;
+        });
+    expect(response).to.equal(1);
+  });
 });
 
-/* file.on('line', (line) => {
-  try {
-    http.get(line, {agent: customAgent(line)}, (res) => {
-      console.log(`Success: ${line}`);
-    }).on('error', (e) =>{
-      console.log(`${line} : ${e.toString().split('\n')[0]}`);
-    });
-  } catch (err) {
-    console.log(`${line} : ${err.toString().split('\n')[0]}`);
-  }
-});*/
