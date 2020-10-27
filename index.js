@@ -9,7 +9,6 @@ const checkIp = (ip) => {
   try {
     const addr = ipaddr.parse(ip);
     const range = addr.range();
-
     if (range !== 'unicast') {
       return false; // Private IP Range
     }

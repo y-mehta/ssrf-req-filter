@@ -7,6 +7,7 @@ const allowedUrlsFile = `${__dirname}/allowedUrls.txt`;
 let blockUrls;
 let allowedUrls;
 
+// Blocked URLs Test
 try {
   blockUrls = JSON.parse(fs.readFileSync(blockUrlsFile));
 } catch (err) {
@@ -20,11 +21,10 @@ blockUrls.forEach((url)=>{
       httpsAgent: ssrfFilter(url)})
         .then((response) => {
           check = 1;
-          // console.log(`Success: ${url}`);
+          console.log(response);
         })
         .catch((error) => {
           check = 0;
-          // console.log('Error');
         })
         .then(() => {
           return check;
@@ -33,6 +33,7 @@ blockUrls.forEach((url)=>{
   });
 });
 
+// Allowed URLs Test
 try {
   allowedUrls = JSON.parse(fs.readFileSync(allowedUrlsFile));
 } catch (err) {
@@ -46,11 +47,9 @@ allowedUrls.forEach((url)=>{
       httpsAgent: ssrfFilter(url)})
         .then((response) => {
           check = 1;
-          // console.log(`Success: ${url}`);
         })
         .catch((error) => {
           check = 0;
-          // console.log(error);
         })
         .then(() => {
           return check;
@@ -59,3 +58,25 @@ allowedUrls.forEach((url)=>{
   });
 });
 
+// DNS Rebind Test
+it(`Test DNS Rebind`, async () => {
+  let check = 0;
+  const url = 'http://A.49.44.166.234.1time.10.0.0.1.1time.repeat.'+ new Date().valueOf() +'.rebind.network';
+  console.log(url);
+  const response = await axios.get(url, {httpAgent: ssrfFilter(url),
+    httpsAgent: ssrfFilter(url)})
+      .then((response) => {
+        check = 1;
+      })
+      .catch((error) => {
+        if (error.message === 'Request failed with status code 400') {
+          check = 1;
+        } else {
+          check = 0;
+        }
+      })
+      .then(() => {
+        return check;
+      });
+  expect(response).to.equal(1);
+});

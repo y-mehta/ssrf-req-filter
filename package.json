@@ -31,7 +31,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha --timeout 10000"
+    "test": "node ./node_modules/mocha/bin/mocha --timeout 50000"
   },
   "repository": {
     "type": "git",
