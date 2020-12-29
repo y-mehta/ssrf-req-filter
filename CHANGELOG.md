@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/y-mehta/ssrf-req-filter/compare/v1.0.2...v1.0.3) (2020-12-29)
+
+
+### Bug Fixes
+
+* Modified tests ([d87fc84](https://github.com/y-mehta/ssrf-req-filter/commit/d87fc848c862cbc6a7fff95fa9e85275aac097d2))
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
