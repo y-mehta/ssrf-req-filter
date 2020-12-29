@@ -32,9 +32,13 @@ const fetch = require("node-fetch");
 const url = 'https://127.0.0.1'
 fetch(url, {
     agent: ssrfFilter(url)
-}).catch(error => {
+  })
+  .then((response) => {
+    console.log(`Success`);
+  })
+  .catch(error => {
     console.log(`${error.toString().split('\n')[0]}`);
-});
+  });
 ```
 
 *Credits*: Implementation inspired By https://github.com/welefen/ssrf-agent
