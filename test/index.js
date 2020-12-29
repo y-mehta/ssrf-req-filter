@@ -7,7 +7,7 @@ const allowedUrlsFile = `${__dirname}/allowedUrls.txt`;
 let blockUrls;
 let allowedUrls;
 
-// Blocked URLs Test
+// Test: Blocked URLs
 try {
   blockUrls = JSON.parse(fs.readFileSync(blockUrlsFile));
 } catch (err) {
@@ -33,7 +33,7 @@ blockUrls.forEach((url)=>{
   });
 });
 
-// Allowed URLs Test
+// Test: Allowed URLs
 try {
   allowedUrls = JSON.parse(fs.readFileSync(allowedUrlsFile));
 } catch (err) {
@@ -58,7 +58,7 @@ allowedUrls.forEach((url)=>{
   });
 });
 
-// DNS Rebind Test
+// Test: DNS Rebind
 it(`Test DNS Rebind`, async () => {
   let check = 0;
   const url = 'http://A.49.44.166.234.1time.10.0.0.1.1time.repeat.'+ new Date().valueOf() +'.rebind.network';
