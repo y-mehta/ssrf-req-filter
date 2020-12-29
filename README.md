@@ -12,6 +12,7 @@ SSRF is an attack vector that abuses an application to interact with the interna
 - Axios:
 ```
 const ssrfFilter = require('ssrf-req-filter');
+const url = 'https://127.0.0.1'
 axios.get(url, {httpAgent: ssrfFilter(url), httpsAgent: ssrfFilter(url)})
       .then((response) => {
         console.log(`Success`);
@@ -22,6 +23,22 @@ axios.get(url, {httpAgent: ssrfFilter(url), httpsAgent: ssrfFilter(url)})
       .then(() => {
 
       });
+```
+
+- Node-fetch:
+```
+const ssrfFilter = require('ssrf-req-filter');
+const fetch = require("node-fetch");
+const url = 'https://127.0.0.1'
+fetch(url, {
+    agent: ssrfFilter(url)
+  })
+  .then((response) => {
+    console.log(`Success`);
+  })
+  .catch(error => {
+    console.log(`${error.toString().split('\n')[0]}`);
+  });
 ```
 
 *Credits*: Implementation inspired By https://github.com/welefen/ssrf-agent
