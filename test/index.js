@@ -15,7 +15,7 @@ try {
 }
 
 blockUrls.forEach((url)=>{
-  it(`${url} Is Blocked`, async () => {
+  it(`${url} is Blocked`, async () => {
     let check = 0;
     const response = await axios.get(url, {httpAgent: ssrfFilter(url),
       httpsAgent: ssrfFilter(url)})
