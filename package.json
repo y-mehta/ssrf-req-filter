@@ -31,11 +31,19 @@
     "eslint-plugin-import": "^2.22.1",
     "mocha": "^8.2.0"
   },
-  "main": "index.js",
+  "main": "./lib/index.js",
   "directories": {
-    "test": "test"
+    "test": "./test",
+    "lib": "./lib"
   },
+  "files": [
+    "lib/",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
+    "lint": "npx eslint lib test",
+    "lintfix": "npx eslint --fix lib test",
     "test": "node ./node_modules/mocha/bin/mocha --timeout 50000"
   },
   "repository": {

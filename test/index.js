@@ -1,4 +1,4 @@
-const ssrfFilter = require('../index');
+const ssrfFilter = require('../lib/index.js');
 const axios = require('axios');
 const fs = require('fs');
 const expect = require('chai').expect;
