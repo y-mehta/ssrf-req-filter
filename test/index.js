@@ -61,7 +61,7 @@ allowedUrls.forEach((url)=>{
 // Test: DNS Rebind
 it(`Test DNS Rebind`, async () => {
   let check = 0;
-  const url = 'http://A.49.44.166.234.1time.10.0.0.1.1time.repeat.'+ new Date().valueOf() +'.rebind.network';
+  const url = 'http://s-35.185.206.165-127.0.0.1-'+ new Date().valueOf() +'-rr-e.d.rebind.it';
   console.log(url);
   const response = await axios.get(url, {httpAgent: ssrfFilter(url),
     httpsAgent: ssrfFilter(url)})
