@@ -91,7 +91,6 @@
   "http://3232235521",
   "http://3232235777",
   "http://7147006462",
-  "http://bugbounty.dod.network",
   "http://customer1.app.localhost.my.company.127.0.0.1.nip.io",
   "http://localhost:+11211aaa",
   "http://localhost:00011211aaaa",
