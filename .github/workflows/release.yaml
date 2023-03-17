@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Manual Release Reason'
 jobs:
   release:
     name: Release
