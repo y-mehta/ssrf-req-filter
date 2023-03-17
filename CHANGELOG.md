@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/y-mehta/ssrf-req-filter/compare/v1.0.5...v1.0.6) (2023-03-17)
+
+
+### Bug Fixes
+
+* bumped outdated dependencies ([#30](https://github.com/y-mehta/ssrf-req-filter/issues/30)) ([bf7d700](https://github.com/y-mehta/ssrf-req-filter/commit/bf7d7000e39f85a40729000f9b26c8cdec1e965c)), closes [#16](https://github.com/y-mehta/ssrf-req-filter/issues/16)
+
 ## [1.0.5](https://github.com/y-mehta/ssrf-req-filter/compare/v1.0.4...v1.0.5) (2021-07-01)
 
 
