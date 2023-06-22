@@ -16,7 +16,7 @@
   ],
   "homepage": "https://github.com/y-mehta/ssrf-req-filter",
   "dependencies": {
-    "ipaddr.js": "^2.0.1"
+    "ipaddr.js": "^2.1.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.2",
