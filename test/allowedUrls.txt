@@ -3,6 +3,5 @@
   "https://github.com",
   "https://facebook.com",
   "https://cloudflare.com",
-  "http://evil.com",
-  "https://microsoft.com?query=test"
+  "http://evil.com"
 ]
