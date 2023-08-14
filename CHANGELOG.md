@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/y-mehta/ssrf-req-filter/compare/v1.0.6...v1.0.7) (2023-08-14)
+
+
+### Bug Fixes
+
+* update allowedUrls.txt ([#35](https://github.com/y-mehta/ssrf-req-filter/issues/35)) ([53a9a32](https://github.com/y-mehta/ssrf-req-filter/commit/53a9a3215cb5ddc7a6bb73d9fba1955b78763c89))
+
 ## [1.0.6](https://github.com/y-mehta/ssrf-req-filter/compare/v1.0.5...v1.0.6) (2023-03-17)
 
 
