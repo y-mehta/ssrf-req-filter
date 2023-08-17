@@ -1,7 +1,7 @@
 {
   "name": "ssrf-req-filter",
   "description": "Module to prevent SSRF when making requests",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "keywords": [
     "ssrf",
     "security",

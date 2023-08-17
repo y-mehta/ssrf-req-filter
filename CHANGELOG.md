@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/y-mehta/ssrf-req-filter/compare/v1.0.7...v1.1.0) (2023-08-17)
+
+
+### Features
+
+* Add support for using existing http(s).Agent ([286e29d](https://github.com/y-mehta/ssrf-req-filter/commit/286e29db59580f1d8df93449318ef4d91123768e))
+
 ## [1.0.7](https://github.com/y-mehta/ssrf-req-filter/compare/v1.0.6...v1.0.7) (2023-08-14)
 
 
