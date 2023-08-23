@@ -44,7 +44,7 @@
   "scripts": {
     "lint": "npx eslint lib test",
     "lintfix": "npx eslint --fix lib test",
-    "test": "node ./node_modules/mocha/bin/mocha --timeout 50000"
+    "test": "node ./node_modules/mocha/bin/mocha"
   },
   "repository": {
     "type": "git",
