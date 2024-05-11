@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/y-mehta/ssrf-req-filter/compare/v1.1.0...v1.1.1) (2024-05-11)
+
+
+### Bug Fixes
+
+* upgrade ipaddr.js from 2.1.0 to 2.2.0 ([#44](https://github.com/y-mehta/ssrf-req-filter/issues/44)) ([6fb0027](https://github.com/y-mehta/ssrf-req-filter/commit/6fb00272585bd53e16d09b6494f52ea4cbf79371))
+
 # [1.1.0](https://github.com/y-mehta/ssrf-req-filter/compare/v1.0.7...v1.1.0) (2023-08-17)
 
 
