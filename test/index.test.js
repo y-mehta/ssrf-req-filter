@@ -209,6 +209,50 @@ describe('SSRF Filtering', () => {
       expect(httpAgentSlot).to.be.instanceOf(http.Agent);
       expect(httpsAgentSlot).to.be.instanceOf(http.Agent);
     });
+
+    // End-to-end: the actual attack this bug enables is a redirect from an
+    // allowed-looking endpoint to an internal target. postman-echo.com's
+    // /redirect-to is used elsewhere in this suite's allowedUrls fixture, so
+    // it's already a trusted dependency here.
+    it('blocks a redirect to a blocked target', async () => {
+      const server = http.createServer((req, res) => res.end('data'));
+      await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
+      const port = server.address().port;
+      let sawServerConnection = false;
+      server.on('connection', () => {
+        sawServerConnection = true;
+      });
+
+      const target = encodeURIComponent(`http://127.0.0.1:${port}/`);
+      const redirectingUrl =
+        `https://postman-echo.com/redirect-to?url=${target}&status_code=302`;
+      const {httpAgent, httpsAgent} = ssrfFilter.agents();
+      const opts = {httpAgent, httpsAgent, maxRedirects: 5};
+
+      let caught;
+      try {
+        await axios.get(redirectingUrl, opts);
+      } catch (error) {
+        caught = error;
+      }
+
+      server.close();
+
+      expect(caught).to.exist;
+      expect(sawServerConnection).to.equal(false);
+    });
+
+    it('follows a legitimate cross-protocol redirect', async () => {
+      const target = encodeURIComponent('http://example.com');
+      const redirectingUrl =
+        `https://postman-echo.com/redirect-to?url=${target}&status_code=302`;
+      const {httpAgent, httpsAgent} = ssrfFilter.agents();
+      const opts = {httpAgent, httpsAgent, maxRedirects: 5};
+
+      const response = await axios.get(redirectingUrl, opts);
+
+      expect(response.status).to.equal(200);
+    });
   });
 
   describe('non-host connections (unix sockets) are blocked', () => {
