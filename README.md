@@ -17,7 +17,8 @@ SSRF is an attack vector that abuses an application to interact with the interna
 ```
 const ssrfFilter = require('ssrf-req-filter');
 const url = 'https://127.0.0.1'
-axios.get(url, {httpAgent: ssrfFilter(url), httpsAgent: ssrfFilter(url)})
+const {httpAgent, httpsAgent} = ssrfFilter.agents();
+axios.get(url, {httpAgent, httpsAgent})
       .then((response) => {
         console.log(`Success`);
       })
@@ -28,6 +29,8 @@ axios.get(url, {httpAgent: ssrfFilter(url), httpsAgent: ssrfFilter(url)})
 
       });
 ```
+
+*Note: use `ssrfFilter.agents()` (not `ssrfFilter(url)` for both slots) when passing both `httpAgent` and `httpsAgent` to Axios. Always set both — otherwise SSRF mitigation can be bypassed via cross-protocol redirects, see [Doyensec's research](https://blog.doyensec.com/2023/03/16/ssrf-remediation-bypass.html). `ssrfFilter.agents()` always returns two distinct, correctly-typed, filtered agents, so a cross-protocol redirect (http\<->https) keeps being filtered instead of erroring out or falling back to an unfiltered agent. `ssrfFilter(url)` still works as before for single-agent use (e.g. node-fetch below).*
 
 
 - Node-fetch:
@@ -47,6 +50,8 @@ fetch(url, {
   });
 ```
 
-*Note: It's recommended to overwrite both httpAgent and httpsAgent in Axios with ssrf-req-filter. Otherwise, SSRF mitigation can be bypassed via cross protocol redirects. Refer to [Doyensec's research](https://blog.doyensec.com/2023/03/16/ssrf-remediation-bypass.html) for more information.*
+## Known limitations
+
+- SSRF protection does not apply when a custom `lookup` option is supplied on the request/agent (e.g. via DNS-caching libraries like [`cacheable-lookup`](https://www.npmjs.com/package/cacheable-lookup), which axios and others support integrating as `config.lookup`). Node does not emit the `'lookup'` socket event for custom resolvers, so the resolved address is never checked against the block list in that case.
 
 *Credits*: Implementation inspired By https://github.com/welefen/ssrf-agent

@@ -97,6 +97,24 @@ const blockedUrls = [
   'http://localhost:443',
   'http://localhost:80',
   'http://localtest.me',
+  // Regression coverage for ipaddr.js >=2.5.0 range fixes — on ipaddr.js
+  // 2.2.0 these were misclassified as 'unicast' and passed through unblocked.
+  'http://[fec0::1]', // RFC3879 deprecated site-local
+  'http://[64:ff9b:1::1]', // RFC8215 NAT64 (can encode arbitrary IPv4 targets)
+  'http://[3fff::1]', // RFC9637 reserved
+  'http://[5f00::1]', // RFC9602 segment routing
+  // Broader ipaddr.js special-range coverage (blocking is range-name-agnostic
+  // in checkIp, but exercising the actual ranges guards against a future
+  // ipaddr.js release reclassifying one of these back to 'unicast').
+  'http://100.64.0.1', // carrierGradeNat (RFC6598, used by some cloud NAT)
+  'http://255.255.255.255', // broadcast
+  'http://224.0.0.1', // multicast
+  'http://192.0.0.8', // reserved (IETF protocol assignments)
+  'http://[ff00::1]', // IPv6 multicast
+  'http://[fc00::1]', // IPv6 uniqueLocal
+  'http://[0100::1]', // IPv6 discard-only prefix
+  'http://[2002::1]', // IPv6 6to4
+  'http://[2001:0:1::1]', // IPv6 teredo
 ];
 
 module.exports = blockedUrls;
