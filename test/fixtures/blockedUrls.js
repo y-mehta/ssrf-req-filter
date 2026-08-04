@@ -97,6 +97,12 @@ const blockedUrls = [
   'http://localhost:443',
   'http://localhost:80',
   'http://localtest.me',
+  // Regression coverage for ipaddr.js >=2.5.0 range fixes — on ipaddr.js
+  // 2.2.0 these were misclassified as 'unicast' and passed through unblocked.
+  'http://[fec0::1]', // RFC3879 deprecated site-local
+  'http://[64:ff9b:1::1]', // RFC8215 NAT64 (can encode arbitrary IPv4 targets)
+  'http://[3fff::1]', // RFC9637 reserved
+  'http://[5f00::1]', // RFC9602 segment routing
 ];
 
 module.exports = blockedUrls;

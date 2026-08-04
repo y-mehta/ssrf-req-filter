@@ -16,7 +16,7 @@
   ],
   "homepage": "https://github.com/y-mehta/ssrf-req-filter",
   "dependencies": {
-    "ipaddr.js": "^2.2.0"
+    "ipaddr.js": "^2.5.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.2",
@@ -32,6 +32,10 @@
     "mocha": "^10.2.0"
   },
   "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "engines": {
+    "node": ">=18"
+  },
   "directories": {
     "test": "./test",
     "lib": "./lib"
